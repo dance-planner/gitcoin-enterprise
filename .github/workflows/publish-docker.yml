@@ -10,6 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: build and publish docker image
+      if: github.event.commits[0].message != 'operational-data-backup'
       run: |
         docker image build ./ -t gitcoin-enterprise
         docker login docker.pkg.github.com --username michael-spengler -p ${{secrets.dockerPublishToken}}
